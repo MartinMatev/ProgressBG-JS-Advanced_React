@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>__cliche_title__</title>
+	<title>webStorages</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -47,7 +47,7 @@
 ##################### SLIDES START #####################
 ########################################################
 -->
-<section><h1>__cliche_title__</h1></section>
+<section><h1>Web Storages</h1></section>
 <section data-transition="zoom">
 	<section>
 		<div class="copyright">
@@ -55,7 +55,7 @@
 				<p>Created for</p>
 			</div>
 			<div class="company">
-				<a href="https://progressbg.net/javascript-advanced-with-reactjs/">
+				<a href="http://progressbg.net/kurs-po-web-design/">
 				<img src="../../../outfit/images/logos/ProgressBG_logo_529_127.png">
 				</a>
 			</div>
@@ -75,21 +75,145 @@
 </section>
 
 
-<section data-min="5"><h1>___MainSectionTitle___</h1></section>
-<section><h2>___MainSectionTitle___</h2>
-  <section><h3>___SubSectionTitle___</h3>
+<section data-min="10"><h1>Cookies</h1></section>
+<section><h2>Cookies</h2>
+  <section><h3>Overview</h3>
+  	<dl class="fa">
+  		<dt>An HTTP cookie is a text data stored to the user's web browser.</dt>
+  		<dt>Cookies are sent with the HTTP response message from the web server.</dt>
+  		<dt>The browser can sore the cookie and send it back to the server with next request.</dt>
+  		<dt>With cookies we can emulate a stateful connection through HTTP, which is <a href="https://en.wikipedia.org/wiki/Stateless_protocol">stateless protocol</a> by design.</dt>
+  	</dl>
+  </section>
+  <section><h3>How cookies are transferred?</h3>
+  	<a href="images/cookie_transfer.png"><img src="images/cookie_transfer.png"></a>
+  </section>
+  <section><h3>Cookie format</h3>
+  	<dl class="fa">
+  		<dt>A Cookie is a string containing a semicolon-separated list of all cookies (i.e. key=value pairs)</dt>
+  		<dt>A Cookie can have optional attributes:</dt>
+  		<dd><span class="note">;path=path</span> − The path to the directory or web page that set the cookie (e.g., '/', '/mydir') . If not specified, defaults to the current path of the current document location.</dd>
+  		<dd><span class="note">;domain=domain</span> −  (e.g., 'example.com' or 'subdomain.example.com'). If not specified, this defaults to the host portion of the current document location.</dd>
+  		<dd><span class="note">;expires=date-in-GMTString-format</span> − defines a specific date and time for when the browser should delete the cookie. If neither expires nor max-age specified it will expire at the end of session.</dd>
+			<dd><span class="note">;secure</span> − the cookie will only be transmitted over secure protocol as <b>https</b>.</dd>
+			<dt>Reference:</dt>
+			<dd><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie">Document​.cookie @mdn</a></dd>
+			<dd><a href="https://en.wikipedia.org/wiki/HTTP_cookie">HTTP cookie @wikipedia</a></dd>
+  	</dl>
+  </section>
+  <section><h3>Setting cookies with JS</h3>
+  	<dl class="fa">
+  		<dt>All cookies are stored in a <code>document.cookie</code> string</dt>
+  	</dl>
+  	<pre><code rel="JS" class="js">
+  		function setCookie(name, value){
+  			// get datetime 1 minute after current time:
+  		  let now = new Date();
+  		  now.setMinutes( now.getMinutes() + 1 );
 
+  		  // set a cooke: <name=value>
+  		  document.cookie = `${name}=${value}; Expires=${now.toString()}; Path=/`
+  		}
+  		setCookie(color, '#FF0000');
+  	</code></pre>
+  </section>
+  <section><h3>Read a cookie value with vanilla JS</h3>
+  	<pre><code rel="JS" class="js">
+  		function readCookie(name){
+  		  // get all cookies
+  		  let cookies = document.cookie;
+
+  		  // check if we have ${name} cookie set, and get its value (note the use of lookahed):
+  		  // see regex explaind here: https://regex101.com/r/0pOjkH/4
+  		  let pattern = `${name}=(.+?)(?=;|$)`;
+  		  let re = new RegExp(pattern,'i');
+
+  		  let match = cookies.match(re);
+  		  if(match){
+  		    return match[1]; // return the 1st capture group, i.e. the cookie value
+  		  }else{
+  		    return false;
+  		  }
+  		}
+
+  		let color = readCookie('color');
+  	</code></pre>
   </section>
 </section>
 
-<!-- <section data-min="1" id='hw'><h1>Exercises</h1></section>
-<section><h2>Task1: __task_title__</h2>
-  <section><h3>__task_description__</h3>
+<section data-min="520"><h1>Session Storage</h1></section>
+<section><h2>Session Storage</h2>
+  <section><h3>References</h3>
   	<dl class="fa">
-  		<dt></dt>
+  		<dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage">sessionStorage @mdn</a></dt>
   	</dl>
   </section>
-</section> -->
+</section>
+
+<section data-min="20"><h1>Local Storage</h1></section>
+<section><h2>Local Storage</h2>
+  <section><h3>References</h3>
+  	<dl class="fa">
+  		<dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage">localStorage @mdn</a></dt>
+  	</dl>
+  </section>
+</section>
+
+<section data-min="5"><h1>Cookies vs Local vs Session Storage</h1></section>
+<section><h2>Cookies vs Local vs Session Storage</h2>
+  <section><h3>Comparison</h3>
+  	<table style="font-size: .9em">
+  		<tr>
+  			<th>Cookies</th>
+  			<th>Local Storage</th>
+  			<th>Session Storage</th>
+  		</tr>
+  		<tr>
+  			<td><span class="note">4KB</span> max</td>
+  			<td><span class="note">10MB</span> max</td>
+  			<td><span class="note">5MB</span> max</td>
+  		</tr>
+  		<tr>
+  			<td>Expiration depends on settings and/or session</td>
+  			<td>Does not expire. Have to be deleted by JS or manually.</td>
+  			<td>Expiration depends session</td>
+  		</tr>
+  		<tr>
+  			<td><span class="note">Server</span> and client-side access.</td>
+  			<td>only client-side access.</td>
+  			<td>only client-side access.</td>
+  		</tr>
+  	</table>
+  </section>
+</section>
+
+<section data-min="1" id="hw"><h1>Exercises</h1></section>
+<section><h2>Task - Store user colour preferences</h2>
+  <section><h3>Given</h3>
+    <dl class="fa">
+      <dt>Given is next hmtl code:</dt>
+    </dl>
+    <pre><code rel="HTML" class="html">
+      <div class="bgChoice">
+        <h2>Choose background color:</h2>
+        <select>
+          <option value="#FF0000">red</option>
+          <option value="#00FF00">green</option>
+          <option value="#0000FF">blue</option>
+        </select>
+        <button>Set BG</button>
+      </div>
+    </code></pre>
+  </section>
+  <section><h3>Task</h3>
+    <dl class="fa">
+      <dt>You have to store the colour selected by the user, so that next time when she enters the site, her chosen colour would be set as page background colour.</dt>
+      <dd>Implement the task with cookies</dd>
+      <dd>Implement the task with Session Storage</dd>
+      <dd>Implement the task with Local Storage</dd>
+    </dl>
+  </section>
+</section>
 
 <section class="disclaimer" data-background="../../../outfit/images/for_slides/the_end_on_sand.jpg">
 	 <p>These slides are based on</p>

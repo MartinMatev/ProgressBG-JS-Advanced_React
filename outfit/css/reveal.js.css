@@ -27,9 +27,13 @@
   opacity: .7;
   /*background: red;*/
 }
+.reveal>.slides>section, .reveal>.slides>section dl{
+  font-size: .8em;
+}
+
 /*sub-section title*/
 .reveal>.slides>section>section>h3{
-  font-size: 1.3em;
+  font-size: 1.1em;
 }
 .reveal>.slides>section>section>h3:after{
   display: block;
@@ -45,6 +49,13 @@
 .reveal section>ul.fa{
   display: block;
   list-style-type: none;
+}
+.reveal section a>img{
+    display: block;
+    margin: 1.5em auto 0 auto;
+    height: 50vh;
+    /*width: 80%;*/
+    box-shadow: 0 0 0.5em .1em;
 }
 .reveal section p+img{
     position: relative;
